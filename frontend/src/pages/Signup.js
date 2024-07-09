@@ -26,7 +26,7 @@ function Signup() {
       return handleError("name, email and password are required");
     }
     try {
-      const url = `https://mern-easeshop-ecommerce.vercel.app/register`;
+      const url = `https://easeshopecommerce.vercel.app/register`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
