@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use('/auth', AuthRouter);
 app.use('/products', ProductRouter);
 app.post('/register', (req, res) =>{
-    const (name, email, password) = req.body;
+    const {name, email, password} = req.body;
     RegisterModel.findOne({email:email})
     .then(user => {
         if(user){
