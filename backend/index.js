@@ -32,7 +32,7 @@ app.post('/register', (req, res) =>{
             .then(result => result.json())
             .catch(err => err.json())
         }
-    }).catch(err -> err.json())
+    }).catch(err => err.json())
 })
 
 app.listen(PORT, () => {
