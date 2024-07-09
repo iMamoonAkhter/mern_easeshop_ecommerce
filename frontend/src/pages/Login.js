@@ -27,7 +27,7 @@ function Login() {
             return handleError('email and password are required')
         }
         try {
-            const url = `http://localhost:3000/login`;
+            const url = `https://easeshopecommerce.vercel.app/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
