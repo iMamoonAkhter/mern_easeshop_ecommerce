@@ -19,41 +19,43 @@ function Login() {
         setLoginInfo(copyLoginInfo);
     };
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const { email, password } = loginInfo;
-        if (!email || !password) {
-            return handleError('Email and password are required');
+const handleLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = loginInfo;
+    if (!email || !password) {
+        return handleError('Email and password are required');
+    }
+    try {
+        const url = `https://mern-easeshop-ecommerce.vercel.app/login`;
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginInfo)
+        });
+        const result = await response.json();
+        console.log("Login API Response:", result); // Log the response for debugging
+        const { success, message, jwtToken, name, error } = result;
+        if (success) {
+            handleSuccess(message);
+            localStorage.setItem('token', jwtToken);
+            localStorage.setItem('loggedInUser', name);
+            setTimeout(() => {
+                navigate('/home');
+            }, 1000);
+        } else if (error) {
+            const details = error?.details[0]?.message;
+            handleError(details);
+        } else {
+            handleError(message); // Handle other possible error scenarios
         }
-        try {
-            const url = `https://mern-easeshop-ecommerce.vercel.app/login`; // Update this URL
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(loginInfo)
-            });
-            const result = await response.json();
-            const { success, message, jwtToken, name, error } = result;
-            if (success) {
-                handleSuccess(message);
-                localStorage.setItem('token', jwtToken);
-                localStorage.setItem('loggedInUser', name);
-                setTimeout(() => {
-                    navigate('/home');
-                }, 1000);
-            } else if (error) {
-                const details = error?.details[0]?.message;
-                handleError(details);
-            } else if (!success) {
-                handleError(message);
-            }
-            console.log(result);
-        } catch (err) {
-            handleError(err.message);
-        }
-    };
+    } catch (err) {
+        console.error("Login API Error:", err); // Log fetch request errors
+        handleError(err.message);
+    }
+};
+
 
     return (
         <div className='container my-4'>
