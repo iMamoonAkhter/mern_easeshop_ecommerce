@@ -13,7 +13,7 @@ app.get('/ping', (req, res) => {
     res.send('PONG');
 });
 app.use(cors({
-    origin: ["https://mern-easeshop-ecommerce.vercel.app"],
+    origin: "https://mern-easeshop-ecommerce.vercel.app",
     methods: ["POST", "GET"],
     credentials: true
 }));
