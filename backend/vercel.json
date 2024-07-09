@@ -1,15 +1,42 @@
 {
-    "version": 2,
-    "builds": [
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
         {
-            "src": "index.js",
-            "use": "@vercel/node"
-        }
-    ],
-    "routes": [
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://mern-easeshop-ecommerce.vercel.app"
+        },
         {
-            "src": "/(.*)",
-            "dest": "index.js"
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, Set-Cookie"
+        },
+        {
+          "key": "Access-Control-Expose-Headers",
+          "value": "Authorization, Set-Cookie"
         }
-    ]
+      ]
+    }
+  ]
 }
