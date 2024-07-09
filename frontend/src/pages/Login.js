@@ -26,7 +26,7 @@ const handleLogin = async (e) => {
         return handleError('Email and password are required');
     }
     try {
-        const url = `https://mern-easeshop-ecommerce.vercel.app/login`;
+        const url = `https://easeshopecommerce.vercel.app/login`;
         const response = await fetch(url, {
             method: "POST",
             headers: {
