@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 8080;
 app.get('/ping', (req, res) => {
     res.send('PONG');
 });
-
-app.use(bodyParser.json());
 app.use(cors({
     origin: ["https://mern-easeshop-ecommerce.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
 }));
+app.use(bodyParser.json());
+
 app.use('/auth', AuthRouter);
 app.use('/products', ProductRouter);
 app.post('/register', (req, res) =>{
