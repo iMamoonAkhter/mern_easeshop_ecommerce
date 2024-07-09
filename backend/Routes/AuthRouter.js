@@ -4,6 +4,6 @@ const { signupValidation, loginValidation } = require('../Middlewares/AuthValida
 const router = require('express').Router();
 
 router.post('/login', loginValidation, login);
-router.post('/signup', signupValidation, signup);
+router.post('/register', signupValidation, signup);
 
 module.exports = router;
