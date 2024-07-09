@@ -51,7 +51,7 @@ const handleLogin = async (e) => {
             handleError(message); // Handle other possible error scenarios
         }
     } catch (err) {
-        console.error("Login API Error:", err); // Log fetch request errors
+        console.log("Login API Error:", err); // Log fetch request errors
         handleError(err.message);
     }
 };
