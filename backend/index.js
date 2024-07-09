@@ -21,7 +21,19 @@ app.use(cors({
 }));
 app.use('/auth', AuthRouter);
 app.use('/products', ProductRouter);
-
+app.post('/register', (req, res) =>{
+    const (name, email, password) = req.body;
+    RegisterModel.findOne({email:email})
+    .then(user => {
+        if(user){
+            res.json("Already have an account!");
+        }else{
+            RegisterModel.create({name: name, email: email, password: password})
+            .then(result => result.json())
+            .catch(err => err.json())
+        }
+    }).catch(err -> err.json())
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
